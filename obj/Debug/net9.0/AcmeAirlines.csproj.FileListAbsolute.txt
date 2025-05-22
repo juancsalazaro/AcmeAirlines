@@ -1,5 +1,3 @@
-C:\Users\Camilo\Documents\AcmeAirlines\bin\Debug\net9.0\appsettings.Development.json
-C:\Users\Camilo\Documents\AcmeAirlines\bin\Debug\net9.0\appsettings.json
 C:\Users\Camilo\Documents\AcmeAirlines\bin\Debug\net9.0\AcmeAirlines.staticwebassets.runtime.json
 C:\Users\Camilo\Documents\AcmeAirlines\bin\Debug\net9.0\AcmeAirlines.staticwebassets.endpoints.json
 C:\Users\Camilo\Documents\AcmeAirlines\bin\Debug\net9.0\AcmeAirlines.exe
@@ -238,3 +236,5 @@ C:\Users\Camilo\Documents\AcmeAirlines\obj\Debug\net9.0\ref\AcmeAirlines.dll
 C:\Users\Camilo\Documents\AcmeAirlines\obj\Debug\net9.0\compressed\ky4or5sr6y-8tq65tu0ol.gz
 C:\Users\Camilo\Documents\AcmeAirlines\obj\Debug\net9.0\compressed\ez74peflvs-8tq65tu0ol.gz
 C:\Users\Camilo\Documents\AcmeAirlines\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\Camilo\Documents\AcmeAirlines\obj\Debug\net9.0\AcmeAirlines.sourcelink.json
+C:\Users\Camilo\Documents\AcmeAirlines\bin\Debug\net9.0\appsettings.json

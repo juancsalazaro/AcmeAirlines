@@ -1,10 +1,6 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Data",
-    "\\Migrations",
-    "\\Services",
-    "\\Views",
     "\\Views\\Home",
     "\\Views\\Shared",
     "\\wwwroot\\css",

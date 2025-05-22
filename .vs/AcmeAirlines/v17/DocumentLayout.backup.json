@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.Development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appsettings.Development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\BookingService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,8 +31,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DTOs\\AdditionalServicesDto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Passenger\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Passenger\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Passenger\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Passenger\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Controllers\\PassengerController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,8 +47,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\SeatController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Seat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Seat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Seat\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Seat\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Shared\\_Layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -63,8 +71,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Summary\\Confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\AdditionalServices\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\AdditionalServices\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\AdditionalServices\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\AdditionalServices\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\IBookingService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -101,10 +109,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\DTOs\\SeatDto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DTOs\\SeatDto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -114,24 +118,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Passenger\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Passenger\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Passenger\\Index.cshtml",
-              "RelativeToolTip": "Views\\Passenger\\Index.cshtml",
-              "ViewState": "AgIAACwBAAAAAAAAAAAwwE8BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:12:42.03Z",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-22T14:08:14.517Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "PassengerController.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Controllers\\PassengerController.cs",
               "RelativeDocumentMoniker": "Controllers\\PassengerController.cs",
@@ -139,12 +143,11 @@
               "RelativeToolTip": "Controllers\\PassengerController.cs",
               "ViewState": "AgIAANEAAAAAAAAAAAAQwPIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:06:19.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:06:19.347Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "PassengerDto.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\DTOs\\PassengerDto.cs",
               "RelativeDocumentMoniker": "DTOs\\PassengerDto.cs",
@@ -152,25 +155,24 @@
               "RelativeToolTip": "DTOs\\PassengerDto.cs",
               "ViewState": "AgIAADwAAAAAAAAAAAAAAFAAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T20:56:00.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:56:00.861Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAQwFwAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAADsAAAAAAAAAAAAQwEcAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-23T23:59:06.395Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "AdditionalServicesDto.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\DTOs\\AdditionalServicesDto.cs",
               "RelativeDocumentMoniker": "DTOs\\AdditionalServicesDto.cs",
@@ -178,12 +180,11 @@
               "RelativeToolTip": "DTOs\\AdditionalServicesDto.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAQwDMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T20:57:39.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:57:39.481Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "AdditionalServicesController.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Controllers\\AdditionalServicesController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdditionalServicesController.cs",
@@ -191,12 +192,36 @@
               "RelativeToolTip": "Controllers\\AdditionalServicesController.cs",
               "ViewState": "AgIAAF0AAAAAAAAAAAAQwH4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:08:44.016Z",
+              "WhenOpened": "2025-05-21T21:08:44.016Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABpAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-23T23:59:27.195Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Passenger\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Passenger\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Passenger\\Index.cshtml",
+              "RelativeToolTip": "Views\\Passenger\\Index.cshtml",
+              "ViewState": "AgIAACwBAAAAAAAAAAAwwE8BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-21T21:12:42.03Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "SummaryController.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Controllers\\SummaryController.cs",
               "RelativeDocumentMoniker": "Controllers\\SummaryController.cs",
@@ -204,12 +229,11 @@
               "RelativeToolTip": "Controllers\\SummaryController.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAQwHQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:08:59.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:08:59.717Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "BookingService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\BookingService.cs",
               "RelativeDocumentMoniker": "Services\\BookingService.cs",
@@ -217,12 +241,11 @@
               "RelativeToolTip": "Services\\BookingService.cs",
               "ViewState": "AgIAAIMAAAAAAAAAAAAQwKQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:05:48.847Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:05:48.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "SeatController.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Controllers\\SeatController.cs",
               "RelativeDocumentMoniker": "Controllers\\SeatController.cs",
@@ -230,12 +253,11 @@
               "RelativeToolTip": "Controllers\\SeatController.cs",
               "ViewState": "AgIAAHsAAAAAAAAAAAAlwJcAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:08:25.414Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:08:25.414Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Seat\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Seat\\Index.cshtml",
@@ -243,12 +265,11 @@
               "RelativeToolTip": "Views\\Seat\\Index.cshtml",
               "ViewState": "AgIAACEAAAAAAAAAAAAAABAAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:13:24.72Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:13:24.72Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -256,12 +277,11 @@
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAADoAAAAAAAAAAAAwwF0AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:42:35.459Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:42:35.459Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Summary\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Summary\\Index.cshtml",
@@ -269,12 +289,11 @@
               "RelativeToolTip": "Views\\Summary\\Index.cshtml",
               "ViewState": "AgIAAA0CAAAAAAAAAAAQwCICAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:20:25.425Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:20:25.425Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "FlightService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\FlightService.cs",
               "RelativeDocumentMoniker": "Services\\FlightService.cs",
@@ -282,12 +301,11 @@
               "RelativeToolTip": "Services\\FlightService.cs",
               "ViewState": "AgIAAJ4AAAAAAAAAAAAgwLIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:26:55.554Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:26:55.554Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "FlightResultDto.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\DTOs\\FlightResultDto.cs",
               "RelativeDocumentMoniker": "DTOs\\FlightResultDto.cs",
@@ -295,12 +313,11 @@
               "RelativeToolTip": "DTOs\\FlightResultDto.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAgwB0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:24:43.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:24:43.196Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Confirmation.cshtml",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\Summary\\Confirmation.cshtml",
               "RelativeDocumentMoniker": "Views\\Summary\\Confirmation.cshtml",
@@ -308,12 +325,11 @@
               "RelativeToolTip": "Views\\Summary\\Confirmation.cshtml",
               "ViewState": "AgIAADcAAAAAAAAAAADwv1wAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:20:50.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:20:50.961Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Views\\AdditionalServices\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\AdditionalServices\\Index.cshtml",
@@ -321,12 +337,11 @@
               "RelativeToolTip": "Views\\AdditionalServices\\Index.cshtml",
               "ViewState": "AgIAAPIBAAAAAAAAAADwv+0BAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T21:17:20.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:17:20.975Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "IBookingService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\IBookingService.cs",
               "RelativeDocumentMoniker": "Services\\IBookingService.cs",
@@ -334,12 +349,11 @@
               "RelativeToolTip": "Services\\IBookingService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:05:33.6Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:05:33.6Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "AdditionalServicesService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\AdditionalServicesService.cs",
               "RelativeDocumentMoniker": "Services\\AdditionalServicesService.cs",
@@ -347,12 +361,11 @@
               "RelativeToolTip": "Services\\AdditionalServicesService.cs",
               "ViewState": "AgIAAC4BAAAAAAAAAAAYwFIBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:05:13.076Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:05:13.076Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "IAdditionalServicesService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\IAdditionalServicesService.cs",
               "RelativeDocumentMoniker": "Services\\IAdditionalServicesService.cs",
@@ -360,12 +373,11 @@
               "RelativeToolTip": "Services\\IAdditionalServicesService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:01:54.917Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:01:54.917Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "SeatService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\SeatService.cs",
               "RelativeDocumentMoniker": "Services\\SeatService.cs",
@@ -373,12 +385,11 @@
               "RelativeToolTip": "Services\\SeatService.cs",
               "ViewState": "AgIAAKIAAAAAAAAAAAAYwMYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T21:01:37.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T21:01:37.363Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "ISeatService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\ISeatService.cs",
               "RelativeDocumentMoniker": "Services\\ISeatService.cs",
@@ -386,12 +397,11 @@
               "RelativeToolTip": "Services\\ISeatService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T20:59:41.732Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:59:41.732Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "PassengerService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\PassengerService.cs",
               "RelativeDocumentMoniker": "Services\\PassengerService.cs",
@@ -399,12 +409,11 @@
               "RelativeToolTip": "Services\\PassengerService.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAYwG0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T20:58:45.246Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:58:45.246Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "IPassengerService.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\Services\\IPassengerService.cs",
               "RelativeDocumentMoniker": "Services\\IPassengerService.cs",
@@ -412,12 +421,11 @@
               "RelativeToolTip": "Services\\IPassengerService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T20:58:17.592Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:58:17.592Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "BookingSummaryDto.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\DTOs\\BookingSummaryDto.cs",
               "RelativeDocumentMoniker": "DTOs\\BookingSummaryDto.cs",
@@ -425,12 +433,11 @@
               "RelativeToolTip": "DTOs\\BookingSummaryDto.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAYwCkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T20:57:57.201Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:57:57.201Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "SeatDto.cs",
               "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\DTOs\\SeatDto.cs",
               "RelativeDocumentMoniker": "DTOs\\SeatDto.cs",
@@ -438,21 +445,7 @@
               "RelativeToolTip": "DTOs\\SeatDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T20:57:02.105Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Camilo\\Documents\\AcmeAirlines\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-23T23:59:27.195Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T20:57:02.105Z"
             }
           ]
         }
