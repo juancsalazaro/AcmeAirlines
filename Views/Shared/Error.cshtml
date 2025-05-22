@@ -1,0 +1,37 @@
+﻿@model AcmeAirlines.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="mb-0"><i class="fas fa-exclamation-triangle mr-2"></i>Error</h2>
+                </div>
+                <div class="card-body text-center">
+                    <h3 class="text-danger">Se ha producido un error al procesar su solicitud</h3>
+
+                    @if (Model.ShowRequestId)
+                    {
+                    <p class="text-muted">
+                        <strong>ID de solicitud:</strong> <code>@Model.RequestId</code>
+                    </p>
+                    }
+
+                    <p class="mt-4">
+                        Le pedimos disculpas por las molestias. Nuestro equipo técnico ha sido notificado
+                        y estamos trabajando para resolver el problema lo antes posible.
+                    </p>
+
+                    <div class="mt-4">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                            <i class="fas fa-home mr-2"></i>Volver a la página de inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

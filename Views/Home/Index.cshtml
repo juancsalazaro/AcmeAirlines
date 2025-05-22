@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12 text-center mb-4">
+            <h1 class="display-4">Bienvenido a Acme Airlines</h1>
+            <p class="lead">El mejor servicio para tus viajes a cualquier destino.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Busca tu vuelo</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Flight" asp-action="Search" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Ciudad de Origen:</label>
+                                <select name="OriginCityId" class="form-control" required>
+                                    <option value="">Selecciona una ciudad</option>
+                                    @foreach (var city in ViewBag.Cities)
+                                    {
+                                    <option value="@city.Id">@city.Name (@city.Code)</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Ciudad de Destino:</label>
+                                <select name="DestinationCityId" class="form-control" required>
+                                    <option value="">Selecciona una ciudad</option>
+                                    @foreach (var city in ViewBag.Cities)
+                                    {
+                                    <option value="@city.Id">@city.Name (@city.Code)</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-3">
+                            <div class="form-group col-md-6">
+                                <label>Fecha de Salida:</label>
+                                <input type="date" name="DepartureDate" class="form-control" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha de Regreso (opcional):</label>
+                                <input type="date" name="ReturnDate" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-3">
+                            <div class="form-group col-md-6">
+                                <label>Número de Pasajeros:</label>
+                                <select name="Passengers" class="form-control">
+                                    @for (int i = 1; i <= 9; i++)
+                                    {
+                                    <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Buscar Vuelos</button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                    <div class="alert alert-warning mt-3">
+                        @ViewBag.ErrorMessage
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-plane fa-3x mb-3 text-primary"></i>
+                    <h4 class="card-title">Vuelos a los mejores destinos</h4>
+                    <p class="card-text">Ofrecemos rutas a las ciudades más importantes a nivel nacional e internacional.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-tag fa-3x mb-3 text-primary"></i>
+                    <h4 class="card-title">Los mejores precios</h4>
+                    <p class="card-text">Tarifas competitivas y promociones especiales durante todo el año.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-headset fa-3x mb-3 text-primary"></i>
+                    <h4 class="card-title">Atención personalizada</h4>
+                    <p class="card-text">Estamos disponibles 24/7 para brindarte la mejor experiencia en tu viaje.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

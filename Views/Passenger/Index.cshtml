@@ -1,0 +1,336 @@
+@model AcmeAirlines.DTOs.PassengerListDto
+
+@{
+    ViewData["Title"] = "Datos de Pasajeros";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Flight" asp-action="Index">Buscar Vuelos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Datos de Pasajeros</li>
+                </ol>
+            </nav>
+
+            <div class="booking-progress mb-4">
+                <div class="step completed">
+                    <div class="step-icon">1</div>
+                    <div class="step-text">Selección de Vuelo</div>
+                </div>
+                <div class="step active">
+                    <div class="step-icon">2</div>
+                    <div class="step-text">Datos de Pasajeros</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <div class="step-text">Selección de Asientos</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">4</div>
+                    <div class="step-text">Servicios Adicionales</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">5</div>
+                    <div class="step-text">Resumen y Pago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Información de Pasajeros</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SavePassengers" method="post" id="passenger-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <h4 class="mb-3">Pasajero Principal</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.FirstName" class="form-label"></label>
+                                <input asp-for="MainPassenger.FirstName" class="form-control" required />
+                                <span asp-validation-for="MainPassenger.FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.LastName" class="form-label"></label>
+                                <input asp-for="MainPassenger.LastName" class="form-control" required />
+                                <span asp-validation-for="MainPassenger.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.DocumentType" class="form-label"></label>
+                                <select asp-for="MainPassenger.DocumentType" class="form-control" required>
+                                    <option value="">Seleccione un tipo de documento</option>
+                                    @foreach (var docType in ViewBag.DocumentTypes)
+                                    {
+                                    <option value="@docType">@docType</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="MainPassenger.DocumentType" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.DocumentNumber" class="form-label"></label>
+                                <input asp-for="MainPassenger.DocumentNumber" class="form-control" required />
+                                <span asp-validation-for="MainPassenger.DocumentNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.DateOfBirth" class="form-label"></label>
+                                <input asp-for="MainPassenger.DateOfBirth" type="date" class="form-control" required />
+                                <span asp-validation-for="MainPassenger.DateOfBirth" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.Nationality" class="form-label"></label>
+                                <select asp-for="MainPassenger.Nationality" class="form-control" required>
+                                    <option value="">Seleccione una nacionalidad</option>
+                                    @foreach (var nationality in ViewBag.Nationalities)
+                                    {
+                                    <option value="@nationality">@nationality</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="MainPassenger.Nationality" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.Email" class="form-label"></label>
+                                <input asp-for="MainPassenger.Email" type="email" class="form-control" required />
+                                <span asp-validation-for="MainPassenger.Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MainPassenger.PhoneNumber" class="form-label"></label>
+                                <input asp-for="MainPassenger.PhoneNumber" class="form-control" required />
+                                <span asp-validation-for="MainPassenger.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input asp-for="MainPassenger.IsUnaccompaniedMinor" class="form-check-input" id="unaccompaniedMinor" />
+                            <label asp-for="MainPassenger.IsUnaccompaniedMinor" class="form-check-label"></label>
+                        </div>
+
+                        <!-- Sección para pasajeros adicionales -->
+                        @if (ViewBag.PassengerCount > 1)
+                        {
+                        <hr class="my-4" />
+                        <h4 class="mb-3">Pasajeros Adicionales</h4>
+
+                        <div id="additional-passengers">
+                            @for (int i = 0; i < ViewBag.PassengerCount - 1; i++)
+                                {
+                            <div class="additional-passenger mb-4 border p-3 rounded">
+                                <h5>Pasajero @(i+2)</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nombre</label>
+                                        <input name="AdditionalPassengers[@i].FirstName" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Apellido</label>
+                                        <input name="AdditionalPassengers[@i].LastName" class="form-control" required />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tipo de documento</label>
+                                        <select name="AdditionalPassengers[@i].DocumentType" class="form-control" required>
+                                            <option value="">Seleccione un tipo de documento</option>
+                                            @foreach (var docType in ViewBag.DocumentTypes)
+                                                    {
+                                            <option value="@docType">@docType</option>
+                                                    }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Número de documento</label>
+                                        <input name="AdditionalPassengers[@i].DocumentNumber" class="form-control" required />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Fecha de nacimiento</label>
+                                        <input name="AdditionalPassengers[@i].DateOfBirth" type="date" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nacionalidad</label>
+                                        <select name="AdditionalPassengers[@i].Nationality" class="form-control" required>
+                                            <option value="">Seleccione una nacionalidad</option>
+                                            @foreach (var nationality in ViewBag.Nationalities)
+                                                    {
+                                            <option value="@nationality">@nationality</option>
+                                                    }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Correo electrónico</label>
+                                        <input name="AdditionalPassengers[@i].Email" type="email" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Teléfono</label>
+                                        <input name="AdditionalPassengers[@i].PhoneNumber" class="form-control" required />
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input name="AdditionalPassengers[@i].IsUnaccompaniedMinor" type="checkbox" class="form-check-input unaccompanied-minor-check" />
+                                    <label class="form-check-label">¿Es un menor que viaja solo?</label>
+                                </div>
+                            </div>
+                                }
+                        </div>
+                        }
+
+                        <!-- Sección para contacto de emergencia (visible solo si hay menores no acompañados) -->
+                        <div id="emergency-contact-section" class="mt-4" style="display: none;">
+                            <hr class="my-4" />
+                            <h4 class="mb-3">Contacto de Emergencia</h4>
+                            <p class="text-muted">Obligatorio para menores que viajan solos.</p>
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i> Los campos marcados con * son obligatorios cuando hay menores no acompañados.
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="EmergencyContact_Name" class="form-label">Nombre *</label>
+                                    <input id="EmergencyContact_Name" name="EmergencyContact.Name" class="form-control" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="EmergencyContact_Relationship" class="form-label">Parentesco/Relación *</label>
+                                    <input id="EmergencyContact_Relationship" name="EmergencyContact.Relationship" class="form-control" placeholder="Padre/Madre/Tutor/Otro" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="EmergencyContact_Phone" class="form-label">Teléfono *</label>
+                                    <input id="EmergencyContact_Phone" name="EmergencyContact.Phone" class="form-control" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="EmergencyContact_Email" class="form-label">Correo electrónico</label>
+                                    <input id="EmergencyContact_Email" name="EmergencyContact.Email" type="email" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="javascript:history.back();" class="btn btn-secondary">Volver</a>
+                            <button type="submit" class="btn btn-primary">Continuar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Resumen de la Reserva</h4>
+                </div>
+                <div class="card-body">
+                    <div class="flight-info mb-3">
+                        <h5>Detalles del Vuelo</h5>
+                        <p>
+                            <strong>Vuelo:</strong> @ViewBag.FlightInfo.FlightNumber<br />
+                            <strong>Ruta:</strong> @ViewBag.FlightInfo.OriginCity (@ViewBag.FlightInfo.OriginCityCode) - @ViewBag.FlightInfo.DestinationCity (@ViewBag.FlightInfo.DestinationCityCode)<br />
+                            <strong>Fecha:</strong> @ViewBag.FlightInfo.DepartureTime.ToString("dd/MM/yyyy")<br />
+                            <strong>Hora:</strong> @ViewBag.FlightInfo.DepartureTime.ToString("HH:mm") - @ViewBag.FlightInfo.ArrivalTime.ToString("HH:mm")<br />
+                            <strong>Tarifa:</strong> @ViewBag.SelectedFareName
+                        </p>
+                    </div>
+
+                    <div class="price-summary">
+                        <h5>Resumen de Precios</h5>
+                        <div class="d-flex justify-content-between">
+                            <span>Precio por pasajero:</span>
+                            <span>$@ViewBag.SelectedFarePrice</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Pasajeros:</span>
+                            <span>@ViewBag.PassengerCount</span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <strong>Total:</strong>
+                            <strong>$@(decimal.Parse(ViewBag.SelectedFarePrice) * ViewBag.PassengerCount)</strong>
+                        </div>
+                        <p class="text-muted small mt-2">
+                            * Los cargos por asientos, equipaje adicional e impuestos se calcularán en los siguientes pasos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            // Función para mostrar/ocultar sección de contacto de emergencia
+            function toggleEmergencyContact() {
+                var hasUnaccompaniedMinor = false;
+
+                // Verificar pasajero principal
+                if ($("#unaccompaniedMinor").is(":checked")) {
+                    hasUnaccompaniedMinor = true;
+                }
+
+                // Verificar pasajeros adicionales
+                $(".unaccompanied-minor-check").each(function () {
+                    if ($(this).is(":checked")) {
+                        hasUnaccompaniedMinor = true;
+                    }
+                });
+
+                // Si hay menores no acompañados, mostrar sección y hacer campos requeridos
+                if (hasUnaccompaniedMinor) {
+                    $("#emergency-contact-section").show();
+
+                    // Hacer campos obligatorios
+                    $("#EmergencyContact_Name").prop("required", true);
+                    $("#EmergencyContact_Phone").prop("required", true);
+                    $("#EmergencyContact_Relationship").prop("required", true);
+                } else {
+                    // No hay menores, eliminar la sección por completo para evitar validaciones
+                    $("#emergency-contact-section").hide();
+
+                    // Quitar atributo required
+                    $("#EmergencyContact_Name").prop("required", false);
+                    $("#EmergencyContact_Phone").prop("required", false);
+                    $("#EmergencyContact_Relationship").prop("required", false);
+
+                    // Limpiar valores
+                    $("#EmergencyContact_Name").val("");
+                    $("#EmergencyContact_Phone").val("");
+                    $("#EmergencyContact_Relationship").val("");
+                    $("#EmergencyContact_Email").val("");
+                }
+            }
+
+            // Eventos para detectar cambios en checkboxes
+            $("#unaccompaniedMinor").change(toggleEmergencyContact);
+            $(document).on("change", ".unaccompanied-minor-check", toggleEmergencyContact);
+
+            // Verificar estado inicial
+            toggleEmergencyContact();
+        });
+    </script>
+}

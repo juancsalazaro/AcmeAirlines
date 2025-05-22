@@ -1,0 +1,547 @@
+@model AcmeAirlines.DTOs.BookingSummaryDto
+@using AcmeAirlines.DTOs
+
+@{
+    ViewData["Title"] = "Resumen de Reserva";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Flight" asp-action="Index">Buscar Vuelos</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Passenger" asp-action="Index">Datos de Pasajeros</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Seat" asp-action="Index">Selección de Asientos</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="AdditionalServices" asp-action="Index">Servicios Adicionales</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Resumen y Pago</li>
+                </ol>
+            </nav>
+
+            <div class="booking-progress mb-4">
+                <div class="step completed">
+                    <div class="step-icon">1</div>
+                    <div class="step-text">Selección de Vuelo</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-icon">2</div>
+                    <div class="step-text">Datos de Pasajeros</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-icon">3</div>
+                    <div class="step-text">Selección de Asientos</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-icon">4</div>
+                    <div class="step-text">Servicios Adicionales</div>
+                </div>
+                <div class="step active">
+                    <div class="step-icon">5</div>
+                    <div class="step-text">Resumen y Pago</div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle mr-2"></i> Su código de reserva temporal: <strong>@ViewBag.ReservationCode</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Resumen de su Reserva</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Información del Vuelo -->
+                    <section class="mb-4">
+                        <h4 class="border-bottom pb-2">Información del Vuelo</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="text-muted">Vuelo</div>
+                                <div class="font-weight-bold">@Model.FlightInfo.FlightNumber</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="text-muted">Fecha</div>
+                                <div class="font-weight-bold">@Model.FlightInfo.DepartureTime.ToString("dd/MM/yyyy")</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="text-muted">Tarifa</div>
+                                <div class="font-weight-bold">@Model.SelectedFare.Name</div>
+                            </div>
+                        </div>
+
+                        <div class="flight-timeline my-4">
+                            <div class="row">
+                                <div class="col-5 text-center">
+                                    <div class="city-code">@Model.FlightInfo.OriginCityCode</div>
+                                    <div class="text-muted">@Model.FlightInfo.OriginCity</div>
+                                    <div class="time">@Model.FlightInfo.DepartureTime.ToString("HH:mm")</div>
+                                </div>
+                                <div class="col-2 d-flex align-items-center justify-content-center position-relative">
+                                    <div class="flight-duration text-center">
+                                        <small class="text-muted d-block">@((int)Model.FlightInfo.Duration.TotalHours)h @(Model.FlightInfo.Duration.Minutes)m</small>
+                                        <div class="flight-line">
+                                            <i class="fas fa-plane"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <div class="city-code">@Model.FlightInfo.DestinationCityCode</div>
+                                    <div class="text-muted">@Model.FlightInfo.DestinationCity</div>
+                                    <div class="time">@Model.FlightInfo.ArrivalTime.ToString("HH:mm")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Información de Pasajeros -->
+                    <section class="mb-4">
+                        <h4 class="border-bottom pb-2">Pasajeros</h4>
+
+                        <div class="passenger-info mb-3">
+                            <h5>Pasajero Principal</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Nombre completo</div>
+                                    <div class="font-weight-bold">@Model.Passengers.MainPassenger.FirstName @Model.Passengers.MainPassenger.LastName</div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Documento</div>
+                                    <div class="font-weight-bold">@Model.Passengers.MainPassenger.DocumentType: @Model.Passengers.MainPassenger.DocumentNumber</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Correo electrónico</div>
+                                    <div class="font-weight-bold">@Model.Passengers.MainPassenger.Email</div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Teléfono</div>
+                                    <div class="font-weight-bold">@Model.Passengers.MainPassenger.PhoneNumber</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (Model.Passengers.AdditionalPassengers.Count > 0)
+                        {
+                        <div class="additional-passengers">
+                            <h5>Pasajeros Adicionales</h5>
+
+                            @foreach (var passenger in Model.Passengers.AdditionalPassengers)
+                                {
+                            <div class="card mb-2">
+                                <div class="card-body py-2">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="font-weight-bold">@passenger.FirstName @passenger.LastName</div>
+                                            <div class="text-muted small">@passenger.DocumentType: @passenger.DocumentNumber</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="small">@passenger.Email</div>
+                                            <div class="text-muted small">@passenger.PhoneNumber</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                }
+                        </div>
+                        }
+
+                        @if (Model.Passengers.EmergencyContact != null)
+                        {
+                        <div class="emergency-contact mt-3">
+                            <h5>Contacto de Emergencia</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Nombre</div>
+                                    <div class="font-weight-bold">@Model.Passengers.EmergencyContact.Name</div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Relación</div>
+                                    <div class="font-weight-bold">@Model.Passengers.EmergencyContact.Relationship</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Teléfono</div>
+                                    <div class="font-weight-bold">@Model.Passengers.EmergencyContact.Phone</div>
+                                </div>
+                                @if (!string.IsNullOrEmpty(Model.Passengers.EmergencyContact.Email))
+                                    {
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Correo electrónico</div>
+                                    <div class="font-weight-bold">@Model.Passengers.EmergencyContact.Email</div>
+                                </div>
+                                    }
+                            </div>
+                        </div>
+                        }
+                    </section>
+
+                    <!-- Asientos -->
+                    <section class="mb-4">
+                        <h4 class="border-bottom pb-2">Asientos Seleccionados</h4>
+
+                        <div class="row">
+                            @foreach (var seat in Model.SeatSelection.SelectedSeats)
+                            {
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="seat-card text-center">
+                                    <div class="seat-number">@seat</div>
+                                    <div class="text-muted small">
+                                        @{
+                                                // Si no hay información disponible de asiento, mostramos datos genéricos
+                                                if (Model.FlightInfo.Seats != null && Model.FlightInfo.Seats.Any())
+                                                {
+                                                    var seatInfo = Model.FlightInfo.Seats.FirstOrDefault(s => s.SeatNumber == seat);
+                                                    if (seatInfo != null)
+                                                    {
+                                            <span>@seatInfo.SeatClass</span>
+                                            @if (seatInfo.IsWindow)
+                                                        {
+                                            <span> (Ventana)</span>
+                                                        }
+                                                        else if (seatInfo.IsAisle)
+                                                        {
+                                            <span> (Pasillo)</span>
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                            <span>Asiento Estándar</span>
+                                                }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </section>
+
+                    <!-- Servicios Adicionales -->
+                    <section class="mb-4">
+                        <h4 class="border-bottom pb-2">Servicios Adicionales</h4>
+
+                        @{
+                            bool hasBaggageOptions = Model.AdditionalServices.BaggageOptions.Any(b => b.IsSelected);
+                            bool hasMealOptions = Model.AdditionalServices.MealOptions.Any(m => m.IsSelected && m.Price > 0);
+                            bool hasExtraServices = Model.AdditionalServices.ExtraServices.Any(e => e.IsSelected);
+                        }
+
+                        @if (hasBaggageOptions || hasMealOptions || hasExtraServices)
+                        {
+                            if (hasBaggageOptions)
+                            {
+                        <h5 class="mt-3">Equipaje</h5>
+                        <ul class="list-group mb-3">
+                            @foreach (var baggage in Model.AdditionalServices.BaggageOptions.Where(b => b.IsSelected))
+                                    {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @baggage.Description
+                                <span class="badge badge-primary badge-pill">$@baggage.Price.ToString("N0")</span>
+                            </li>
+                                    }
+                        </ul>
+                            }
+
+                            if (hasMealOptions)
+                            {
+                        <h5 class="mt-3">Comidas</h5>
+                        <ul class="list-group mb-3">
+                            @foreach (var meal in Model.AdditionalServices.MealOptions.Where(m => m.IsSelected && m.Price > 0))
+                                    {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @meal.Name - @meal.DietaryType
+                                <span class="badge badge-primary badge-pill">$@meal.Price.ToString("N0")</span>
+                            </li>
+                                    }
+                        </ul>
+                            }
+
+                            if (hasExtraServices)
+                            {
+                        <h5 class="mt-3">Servicios Extra</h5>
+                        <ul class="list-group mb-3">
+                            @foreach (var service in Model.AdditionalServices.ExtraServices.Where(e => e.IsSelected))
+                                    {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @service.Name
+                                <span class="badge badge-primary badge-pill">$@service.Price.ToString("N0")</span>
+                            </li>
+                                    }
+                        </ul>
+                            }
+                        }
+                        else
+                        {
+                        <div class="alert alert-light text-center">
+                            <p class="mb-0">No se han seleccionado servicios adicionales.</p>
+                        </div>
+                        }
+                    </section>
+                </div>
+            </div>
+
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Método de Pago</h3>
+                </div>
+                <div class="card-body">
+                    <div class="payment-methods">
+                        <div class="form-check form-check-inline mb-3">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
+                            <label class="form-check-label" for="creditCard">
+                                <i class="fab fa-cc-visa mr-1"></i>
+                                <i class="fab fa-cc-mastercard mr-1"></i>
+                                Tarjeta de Crédito
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline mb-3">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="debitCard" value="debitCard">
+                            <label class="form-check-label" for="debitCard">
+                                Tarjeta de Débito
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline mb-3">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
+                            <label class="form-check-label" for="paypal">
+                                <i class="fab fa-paypal mr-1"></i>
+                                PayPal
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="creditCardForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cardName">Nombre en la tarjeta</label>
+                                <input type="text" class="form-control" id="cardName" placeholder="Nombre que aparece en la tarjeta" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cardNumber">Número de tarjeta</label>
+                                <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="expirationMonth">Mes de expiración</label>
+                                <select class="form-control" id="expirationMonth" required>
+                                    <option value="">Mes</option>
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                    <option value="@i.ToString("D2")">@i.ToString("D2")</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="expirationYear">Año de expiración</label>
+                                <select class="form-control" id="expirationYear" required>
+                                    <option value="">Año</option>
+                                    @for (int i = DateTime.Now.Year; i <= DateTime.Now.Year + 10; i++)
+                                    {
+                                    <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="cvv">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mb-5">
+                <a asp-controller="AdditionalServices" asp-action="Index" class="btn btn-secondary">Volver</a>
+                <form asp-action="Confirm" method="post">
+                    <button type="submit" class="btn btn-success btn-lg">Confirmar y Pagar</button>
+                </form>
+                <form asp-action="Cancel" method="post">
+                    <button type="submit" class="btn btn-danger">Cancelar Reserva</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4 sticky-top" style="top: 20px;">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Detalle de Pago</h4>
+                </div>
+                <div class="card-body">
+                    <div class="price-summary">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tarifa base (@Model.SelectedFare.Name):</span>
+                            <span>$@Model.PricingSummary.BaseFarePrice.ToString("N0")</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Pasajeros:</span>
+                            <span>@Model.PricingSummary.PassengerCount</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span>$@Model.PricingSummary.TotalBaseFare.ToString("N0")</span>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Asientos (cargos adicionales):</span>
+                            <span>$@Model.PricingSummary.SeatUpgradeCharges.ToString("N0")</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Equipaje adicional:</span>
+                            <span>$@Model.PricingSummary.BaggageCharges.ToString("N0")</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Comidas especiales:</span>
+                            <span>$@Model.PricingSummary.MealCharges.ToString("N0")</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Otros servicios:</span>
+                            <span>$@Model.PricingSummary.OtherServiceCharges.ToString("N0")</span>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Impuestos y tasas:</span>
+                            <span>$@Model.PricingSummary.TaxesAndFees.ToString("N0")</span>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Total:</h5>
+                            <h5 class="text-primary mb-0">$@Model.PricingSummary.TotalAmount.ToString("N0")</h5>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="alert alert-info small">
+                            <i class="fas fa-info-circle mr-2"></i> Al hacer clic en "Confirmar y Pagar", usted acepta nuestros <a href="#" class="alert-link">Términos y Condiciones</a> y <a href="#" class="alert-link">Política de Privacidad</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        /* Estilos para timeline de vuelo */
+        .flight-timeline {
+            position: relative;
+        }
+
+        .flight-line {
+            position: relative;
+            border-top: 2px dashed #007bff;
+            margin-top: 10px;
+        }
+
+            .flight-line i {
+                position: absolute;
+                top: -10px;
+                left: 50%;
+                transform: translateX(-50%) rotate(90deg);
+                color: #007bff;
+            }
+
+        .city-code {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .time {
+            font-weight: bold;
+        }
+
+        /* Estilos para tarjetas de asientos */
+        .seat-card {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .seat-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Estilos para pasos de reserva */
+        .booking-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+            .step:not(:last-child):after {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 60%;
+                width: 80%;
+                height: 2px;
+                background-color: #dee2e6;
+                z-index: 0;
+            }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            color: #6c757d;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step.active .step-icon {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .step.completed .step-icon {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .step.completed:after {
+            background-color: #28a745;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            // Cambiar formulario según método de pago seleccionado
+            $('input[name="paymentMethod"]').change(function () {
+                const method = $(this).val();
+
+                if (method === 'creditCard' || method === 'debitCard') {
+                    $('#creditCardForm').show();
+                } else {
+                    $('#creditCardForm').hide();
+                }
+            });
+        });
+    </script>
+}

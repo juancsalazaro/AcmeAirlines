@@ -1,0 +1,94 @@
+@model AcmeAirlines.DTOs.FlightSearchDto
+
+@{
+    ViewData["Title"] = "Buscar Vuelos";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Buscar Vuelos</h2>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Completa los datos de tu viaje</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Search" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Ciudad de Origen:</label>
+                                <select asp-for="OriginCityId" class="form-control" required>
+                                    <option value="">Selecciona una ciudad</option>
+                                    @foreach (var city in ViewBag.Cities)
+                                    {
+                                    <option value="@city.Id">@city.Name (@city.Code)</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="OriginCityId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Ciudad de Destino:</label>
+                                <select asp-for="DestinationCityId" class="form-control" required>
+                                    <option value="">Selecciona una ciudad</option>
+                                    @foreach (var city in ViewBag.Cities)
+                                    {
+                                    <option value="@city.Id">@city.Name (@city.Code)</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="DestinationCityId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-3">
+                            <div class="form-group col-md-6">
+                                <label>Fecha de Salida:</label>
+                                <input asp-for="DepartureDate" type="date" class="form-control" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="DepartureDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha de Regreso (opcional):</label>
+                                <input asp-for="ReturnDate" type="date" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-3">
+                            <div class="form-group col-md-6">
+                                <label>Número de Pasajeros:</label>
+                                <select asp-for="Passengers" class="form-control">
+                                    @for (int i = 1; i <= 9; i++)
+                                    {
+                                    <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Buscar Vuelos</button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                    <div class="alert alert-warning mt-3">
+                        @ViewBag.ErrorMessage
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

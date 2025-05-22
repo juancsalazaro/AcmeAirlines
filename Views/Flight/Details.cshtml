@@ -1,0 +1,140 @@
+@model AcmeAirlines.DTOs.FlightResultDto
+
+@{
+    ViewData["Title"] = "Detalles del Vuelo";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Detalles del Vuelo @Model.FlightNumber</h2>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4 shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">@Model.OriginCity (@Model.OriginCityCode) - @Model.DestinationCity (@Model.DestinationCityCode)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-center">
+                                    <h4>@Model.DepartureTime.ToString("HH:mm")</h4>
+                                    <p class="mb-0">@Model.OriginCityCode</p>
+                                    <p class="text-muted">@Model.DepartureTime.ToString("dd MMM yyyy")</p>
+                                </div>
+                                <div class="text-center flex-grow-1">
+                                    <div class="flight-detail-line position-relative">
+                                        <i class="fas fa-plane"></i>
+                                        <p class="text-muted mb-0">Duración: @(((int)Model.Duration.TotalHours).ToString("00"))h @(Model.Duration.Minutes.ToString("00"))m</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h4>@Model.ArrivalTime.ToString("HH:mm")</h4>
+                                    <p class="mb-0">@Model.DestinationCityCode</p>
+                                    <p class="text-muted">@Model.ArrivalTime.ToString("dd MMM yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="mb-3">Selecciona tu tarifa</h4>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Tarifa</th>
+                                            <th>Descripción</th>
+                                            <th>Equipaje</th>
+                                            <th>Cambios</th>
+                                            <th>Precio</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var fare in Model.Fares)
+                                        {
+                                        <tr>
+                                            <td>
+                                                <strong>@fare.Name</strong>
+                                            </td>
+                                            <td>@fare.Description</td>
+                                            <td>
+                                                @if (fare.IncludesCheckedBaggage)
+                                                    {
+                                                <span class="text-success"><i class="fas fa-check"></i> Incluido</span>
+                                                    }
+                                                    else
+                                                    {
+                                                <span class="text-danger"><i class="fas fa-times"></i> No incluido</span>
+                                                    }
+                                            </td>
+                                            <td>
+                                                @if (fare.IsRefundable)
+                                                    {
+                                                <span class="text-success">
+                                                    <i class="fas fa-check"></i> Permitidos
+                                                    @if (fare.ChangeFee > 0)
+                                                            {
+                                                    <span> (Cargo: $@fare.ChangeFee.ToString("N0"))</span>
+                                                            }
+                                                            else
+                                                            {
+                                                    <span> (Sin cargo)</span>
+                                                            }
+                                                </span>
+                                                    }
+                                                    else
+                                                    {
+                                                <span class="text-danger"><i class="fas fa-times"></i> No permitidos</span>
+                                                    }
+                                            </td>
+                                            <td>
+                                                <h5 class="text-primary mb-0">$@fare.Price.ToString("N0")</h5>
+                                            </td>
+                                            <td>
+                                                <a asp-action="SelectFare" asp-route-flightId="@Model.FlightId" asp-route-fareId="@fare.FareId" class="btn btn-primary">Seleccionar</a>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-3 mb-5">
+        <a href="javascript:history.back();" class="btn btn-secondary">Volver a resultados</a>
+    </div>
+</div>
+
+<style>
+    .flight-detail-line {
+        position: relative;
+        width: 100%;
+        border-top: 2px dashed #007bff;
+        margin-top: 30px;
+    }
+
+        .flight-detail-line i {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg);
+            background-color: white;
+            padding: 0 10px;
+            color: #007bff;
+            font-size: 1.5rem;
+        }
+</style>

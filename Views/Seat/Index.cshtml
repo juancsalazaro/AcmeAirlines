@@ -1,0 +1,604 @@
+@model AcmeAirlines.DTOs.SeatMapDto
+
+@{
+    ViewData["Title"] = "Selección de Asientos";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Flight" asp-action="Index">Buscar Vuelos</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Passenger" asp-action="Index">Datos de Pasajeros</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Selección de Asientos</li>
+                </ol>
+            </nav>
+
+            <div class="booking-progress mb-4">
+                <div class="step completed">
+                    <div class="step-icon">1</div>
+                    <div class="step-text">Selección de Vuelo</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-icon">2</div>
+                    <div class="step-text">Datos de Pasajeros</div>
+                </div>
+                <div class="step active">
+                    <div class="step-icon">3</div>
+                    <div class="step-text">Selección de Asientos</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">4</div>
+                    <div class="step-text">Servicios Adicionales</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">5</div>
+                    <div class="step-text">Resumen y Pago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Selección de Asientos - Vuelo @Model.FlightNumber</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle mr-2"></i> Por favor, seleccione @ViewBag.PassengerCount asiento(s) para sus pasajeros.
+                    </div>
+
+                    <form asp-action="SelectSeats" method="post" id="seat-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="seat-map-container mt-4">
+                            <div class="seat-map-legend mb-3">
+                                <div class="d-flex justify-content-center">
+                                    <div class="legend-item mx-2">
+                                        <div class="seat-icon available"></div>
+                                        <span>Disponible</span>
+                                    </div>
+                                    <div class="legend-item mx-2">
+                                        <div class="seat-icon selected"></div>
+                                        <span>Seleccionado</span>
+                                    </div>
+                                    <div class="legend-item mx-2">
+                                        <div class="seat-icon occupied"></div>
+                                        <span>Ocupado</span>
+                                    </div>
+                                    <div class="legend-item mx-2">
+                                        <div class="seat-icon premium"></div>
+                                        <span>Premium</span>
+                                    </div>
+                                    <div class="legend-item mx-2">
+                                        <div class="seat-icon emergency"></div>
+                                        <span>Salida de emergencia</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="aircraft-header text-center mb-3">
+                                <img src="/images/aircraft-nose.svg" alt="Parte delantera del avión" class="img-fluid" style="max-height: 50px;" />
+                            </div>
+
+                            <div class="seat-map">
+                                <!-- Primera clase -->
+                                <div class="seat-section mb-4">
+                                    <h5 class="text-center mb-3">Primera Clase</h5>
+                                    <div class="seat-grid first-class">
+                                        @{
+                                            var firstClassSeats = Model.Seats.Where(s => s.SeatClass == "First").ToList();
+                                            for (int row = 1; row <= 2; row++)
+                                            {
+                                            <div class="seat-row">
+                                                <div class="row-number">@row</div>
+                                                @for (int col = 0; col < 6; col++)
+                                                    {
+                                                        char seatLetter = (char)('A' + col);
+                                                        string seatNumber = $"{row}{seatLetter}";
+                                                        var seat = firstClassSeats.FirstOrDefault(s => s.SeatNumber == seatNumber);
+
+                                                        if (col == 3)
+                                                        {
+                                                <div class="aisle"></div>
+                                                        }
+
+                                                        string seatClasses = "seat first-class";
+                                                        if (seat == null || !seat.IsAvailable)
+                                                        {
+                                                            seatClasses += " occupied";
+                                                        }
+                                                        else if (seat.IsEmergencyExit)
+                                                        {
+                                                            seatClasses += " emergency";
+                                                        }
+
+                                                <div class="@seatClasses" data-seat="@seatNumber" data-price="@(seat?.ExtraCharge ?? 0)" title="@seatNumber">
+                                                    @seatLetter
+                                                </div>
+                                                    }
+                                            </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
+                                <!-- Clase ejecutiva -->
+                                <div class="seat-section mb-4">
+                                    <h5 class="text-center mb-3">Clase Ejecutiva</h5>
+                                    <div class="seat-grid business-class">
+                                        @{
+                                            var businessClassSeats = Model.Seats.Where(s => s.SeatClass == "Business").ToList();
+                                            for (int row = 3; row <= 8; row++)
+                                            {
+                                            <div class="seat-row">
+                                                <div class="row-number">@row</div>
+                                                @for (int col = 0; col < 6; col++)
+                                                    {
+                                                        char seatLetter = (char)('A' + col);
+                                                        string seatNumber = $"{row}{seatLetter}";
+                                                        var seat = businessClassSeats.FirstOrDefault(s => s.SeatNumber == seatNumber);
+
+                                                        if (col == 3)
+                                                        {
+                                                <div class="aisle"></div>
+                                                        }
+
+                                                        string seatClasses = "seat business-class";
+                                                        if (seat == null || !seat.IsAvailable)
+                                                        {
+                                                            seatClasses += " occupied";
+                                                        }
+                                                        else if (seat.IsEmergencyExit)
+                                                        {
+                                                            seatClasses += " emergency";
+                                                        }
+
+                                                <div class="@seatClasses" data-seat="@seatNumber" data-price="@(seat?.ExtraCharge ?? 0)" title="@seatNumber">
+                                                    @seatLetter
+                                                </div>
+                                                    }
+                                            </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
+                                <!-- Clase económica -->
+                                <div class="seat-section">
+                                    <h5 class="text-center mb-3">Clase Económica</h5>
+                                    <div class="seat-grid economy-class">
+                                        @{
+                                            var economyClassSeats = Model.Seats.Where(s => s.SeatClass == "Economy").ToList();
+                                            for (int row = 9; row <= Model.TotalRows; row++)
+                                            {
+                                            <div class="seat-row @(row == 14 || row == 15 ? "emergency-row" : "")">
+                                                <div class="row-number">@row</div>
+                                                @for (int col = 0; col < 6; col++)
+                                                    {
+                                                        char seatLetter = (char)('A' + col);
+                                                        string seatNumber = $"{row}{seatLetter}";
+                                                        var seat = economyClassSeats.FirstOrDefault(s => s.SeatNumber == seatNumber);
+
+                                                        if (col == 3)
+                                                        {
+                                                <div class="aisle"></div>
+                                                        }
+
+                                                        string seatClasses = "seat economy-class";
+                                                        if (seat == null || !seat.IsAvailable)
+                                                        {
+                                                            seatClasses += " occupied";
+                                                        }
+                                                        else if (seat.IsEmergencyExit)
+                                                        {
+                                                            seatClasses += " emergency";
+                                                        }
+
+                                                <div class="@seatClasses" data-seat="@seatNumber" data-price="@(seat?.ExtraCharge ?? 0)" title="@seatNumber">
+                                                    @seatLetter
+                                                </div>
+                                                    }
+                                            </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="aircraft-footer text-center mt-3">
+                                <img src="/images/aircraft-tail.svg" alt="Parte trasera del avión" class="img-fluid" style="max-height: 50px;" />
+                            </div>
+                        </div>
+
+                        <div id="selected-seats-container" class="mt-4">
+                            <h5>Asientos Seleccionados:</h5>
+                            <div id="selected-seats-list" class="mb-3">
+                                <p class="text-muted">No hay asientos seleccionados</p>
+                            </div>
+
+                            <div id="selected-seats-input-container">
+                                <!-- Aquí se agregarán inputs hidden dinámicamente -->
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="javascript:history.back();" class="btn btn-secondary">Volver</a>
+                            <button type="submit" class="btn btn-primary">Continuar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Información de Asientos</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5>Detalles del Vuelo</h5>
+                        <p>
+                            <strong>Vuelo:</strong> @Model.FlightNumber<br />
+                            <strong>Ruta:</strong> @ViewBag.FlightInfo.OriginCity (@ViewBag.FlightInfo.OriginCityCode) - @ViewBag.FlightInfo.DestinationCity (@ViewBag.FlightInfo.DestinationCityCode)<br />
+                            <strong>Fecha:</strong> @ViewBag.FlightInfo.DepartureTime.ToString("dd/MM/yyyy")<br />
+                            <strong>Tarifa:</strong> @ViewBag.SelectedFareName
+                        </p>
+                    </div>
+
+                    <div class="seat-info mb-3">
+                        <h5>Restricciones de Asientos</h5>
+                        @if (ViewBag.SelectedFareName == "Económica")
+                        {
+                        <p>Con la tarifa <strong>Económica</strong> no podrá seleccionar asientos de Primera Clase o Clase Ejecutiva.</p>
+                        }
+                        else if (ViewBag.SelectedFareName == "Ejecutiva")
+                        {
+                        <p>Con la tarifa <strong>Ejecutiva</strong> no podrá seleccionar asientos de Primera Clase.</p>
+                        }
+                        else
+                        {
+                        <p>Con la tarifa <strong>Premium</strong> puede seleccionar cualquier asiento disponible en el avión.</p>
+                        }
+                    </div>
+
+                    <div class="seat-pricing mb-3">
+                        <h5>Precios Adicionales</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Primera Clase:</span>
+                                    <span>+$150,000</span>
+                                </div>
+                            </li>
+                            <li class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Clase Ejecutiva:</span>
+                                    <span>+$80,000</span>
+                                </div>
+                            </li>
+                            <li class="mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>Salida de emergencia:</span>
+                                    <span>+$40,000</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between">
+                                    <span>Asiento estándar:</span>
+                                    <span>Sin cargo adicional</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="seat-summary">
+                        <h5>Resumen de Selección</h5>
+                        <div class="mb-2">
+                            <div class="d-flex justify-content-between">
+                                <span>Pasajeros:</span>
+                                <span>@ViewBag.PassengerCount</span>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="d-flex justify-content-between">
+                                <span>Asientos seleccionados:</span>
+                                <span id="seats-count">0</span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="mb-2">
+                            <div class="d-flex justify-content-between">
+                                <strong>Cargo adicional total:</strong>
+                                <strong id="total-extra-charge">$0</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        /* Estilos para el mapa de asientos */
+        .seat-map-container {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .seat-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .seat-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .emergency-row {
+            background-color: rgba(255, 193, 7, 0.1);
+            padding: 5px 0;
+            border-radius: 5px;
+        }
+
+        .row-number {
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .seat {
+            width: 35px;
+            height: 35px;
+            margin: 0 5px;
+            background-color: #ced4da;
+            border: 1px solid #adb5bd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .seat:hover:not(.occupied) {
+                transform: scale(1.1);
+            }
+
+        .aisle {
+            width: 20px;
+        }
+
+        .first-class {
+            background-color: #9bc8e3;
+            border-color: #5fa5cf;
+        }
+
+        .business-class {
+            background-color: #aed3b9;
+            border-color: #73b889;
+        }
+
+        .economy-class {
+            background-color: #e3e3e3;
+            border-color: #ced4da;
+        }
+
+        .seat.selected {
+            background-color: #007bff;
+            border-color: #0056b3;
+            color: white;
+        }
+
+        .seat.occupied {
+            background-color: #6c757d;
+            border-color: #495057;
+            color: #f8f9fa;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .seat.emergency {
+            background-color: #ffc107;
+            border-color: #d39e00;
+        }
+
+        /* Leyenda */
+        .seat-map-legend {
+            display: flex;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .seat-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 5px;
+            border: 1px solid #adb5bd;
+        }
+
+            .seat-icon.available {
+                background-color: #e3e3e3;
+            }
+
+            .seat-icon.selected {
+                background-color: #007bff;
+            }
+
+            .seat-icon.occupied {
+                background-color: #6c757d;
+            }
+
+            .seat-icon.premium {
+                background-color: #9bc8e3;
+            }
+
+            .seat-icon.emergency {
+                background-color: #ffc107;
+            }
+
+        /* Pasos de reserva */
+        .booking-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+            .step:not(:last-child):after {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 60%;
+                width: 80%;
+                height: 2px;
+                background-color: #dee2e6;
+                z-index: 0;
+            }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            color: #6c757d;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step.active .step-icon {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .step.completed .step-icon {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .step.completed:after {
+            background-color: #28a745;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            const maxSeats = @ViewBag.PassengerCount;
+            let selectedSeats = [];
+            let totalExtraCharge = 0;
+
+            // Función para formatear moneda
+            function formatCurrency(amount) {
+                return '$' + parseInt(amount).toLocaleString('es-CO');
+            }
+
+            // Función para actualizar el resumen
+            function updateSummary() {
+                $('#seats-count').text(selectedSeats.length);
+                $('#total-extra-charge').text(formatCurrency(totalExtraCharge));
+
+                // Actualizar lista de asientos
+                let seatsList = $('#selected-seats-list');
+                if (selectedSeats.length === 0) {
+                    seatsList.html('<p class="text-muted">No hay asientos seleccionados</p>');
+                } else {
+                    let html = '<ul class="list-group">';
+                    selectedSeats.forEach(function(seatData) {
+                        html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                            Asiento ${seatData.seat}
+                            <span class="badge badge-${seatData.extraCharge > 0 ? 'primary' : 'secondary'} badge-pill">
+                                ${seatData.extraCharge > 0 ? formatCurrency(seatData.extraCharge) : 'Sin cargo'}
+                            </span>
+                        </li>`;
+                    });
+                    html += '</ul>';
+                    seatsList.html(html);
+                }
+
+                // Actualizar inputs para el formulario
+                let inputContainer = $('#selected-seats-input-container');
+                inputContainer.empty();
+
+                selectedSeats.forEach(function(seatData, index) {
+                    inputContainer.append(`<input type="hidden" name="SelectedSeats[${index}]" value="${seatData.seat}" />`);
+                });
+
+                // Añadir el cargo total
+                inputContainer.append(`<input type="hidden" name="TotalExtraCharge" value="${totalExtraCharge}" />`);
+
+                // Añadir el ID del vuelo
+                inputContainer.append(`<input type="hidden" name="FlightId" value="${@Model.FlightId}" />`);
+            }
+
+            // Evento de clic en asiento
+            $('.seat').click(function() {
+                if ($(this).hasClass('occupied')) {
+                    return; // No hacer nada si el asiento está ocupado
+                }
+
+                const seat = $(this).data('seat');
+                const extraCharge = parseFloat($(this).data('price')) || 0;
+
+                // Verificar si el asiento ya está seleccionado
+                const seatIndex = selectedSeats.findIndex(s => s.seat === seat);
+
+                if (seatIndex !== -1) {
+                    // Quitar selección
+                    $(this).removeClass('selected');
+                    selectedSeats.splice(seatIndex, 1);
+                    totalExtraCharge -= extraCharge;
+                } else {
+                    // Añadir selección
+                    if (selectedSeats.length >= maxSeats) {
+                        alert(`Solo puede seleccionar ${maxSeats} asiento(s).`);
+                        return;
+                    }
+
+                    $(this).addClass('selected');
+                    selectedSeats.push({ seat: seat, extraCharge: extraCharge });
+                    totalExtraCharge += extraCharge;
+                }
+
+                updateSummary();
+            });
+
+            // Validación del formulario
+            $('#seat-form').submit(function(e) {
+                if (selectedSeats.length < maxSeats) {
+                    e.preventDefault();
+                    alert(`Debe seleccionar exactamente ${maxSeats} asiento(s).`);
+                }
+            });
+
+            // Inicializar resumen
+            updateSummary();
+        });
+    </script>
+}

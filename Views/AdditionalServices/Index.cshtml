@@ -1,0 +1,518 @@
+@model AcmeAirlines.DTOs.AdditionalServicesDto
+
+@{
+    ViewData["Title"] = "Servicios Adicionales";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Flight" asp-action="Index">Buscar Vuelos</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Passenger" asp-action="Index">Datos de Pasajeros</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Seat" asp-action="Index">Selección de Asientos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Servicios Adicionales</li>
+                </ol>
+            </nav>
+
+            <div class="booking-progress mb-4">
+                <div class="step completed">
+                    <div class="step-icon">1</div>
+                    <div class="step-text">Selección de Vuelo</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-icon">2</div>
+                    <div class="step-text">Datos de Pasajeros</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-icon">3</div>
+                    <div class="step-text">Selección de Asientos</div>
+                </div>
+                <div class="step active">
+                    <div class="step-icon">4</div>
+                    <div class="step-text">Servicios Adicionales</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">5</div>
+                    <div class="step-text">Resumen y Pago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Servicios Adicionales</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle mr-2"></i> Seleccione los servicios adicionales que desea agregar a su reserva. Este paso es opcional.
+                    </div>
+
+                    <form asp-action="SelectServices" method="post" id="services-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <!-- Opciones de Equipaje -->
+                        <section class="mb-5">
+                            <h4 class="mb-3">Equipaje</h4>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th>Peso</th>
+                                            <th>Precio</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.BaggageOptions.Count; i++)
+                                        {
+                                            var baggage = Model.BaggageOptions[i];
+
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="mr-3">
+                                                        <i class="fas fa-suitcase fa-2x text-primary"></i>
+                                                    </div>
+                                                    <div>
+                                                        <strong>@baggage.Description</strong>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>@baggage.WeightInKg kg</td>
+                                            <td>$@baggage.Price.ToString("N0")</td>
+                                            <td>
+                                                <div class="quantity-selector">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary quantity-decrease">-</button>
+                                                    <input type="number" class="form-control form-control-sm quantity-input"
+                                                           data-price="@baggage.Price"
+                                                           data-id="@baggage.Id"
+                                                           min="0" max="10" value="0" readonly>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary quantity-increase">+</button>
+                                                </div>
+                                                <input type="hidden" name="SelectedBaggageIds[@i]" value="" class="baggage-id-input">
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <!-- Opciones de Comidas -->
+                        <section class="mb-5">
+                            <h4 class="mb-3">Opciones de Comida</h4>
+                            <p class="text-muted mb-3">Seleccione sus preferencias de comida para el vuelo.</p>
+
+                            <div class="meal-options">
+                                <div class="row">
+                                    @for (int i = 0; i < Model.MealOptions.Count; i++)
+                                    {
+                                        var meal = Model.MealOptions[i];
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card h-100 @(meal.Price > 0 ? "border-primary" : "")">
+                                            <div class="card-body">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="meal-@meal.Id" name="SelectedMealIds"
+                                                           value="@meal.Id" class="custom-control-input meal-option"
+                                                           data-price="@meal.Price"
+                                                           @(i == 0 ? "checked" : "")>
+                                                    <label class="custom-control-label" for="meal-@meal.Id">
+                                                        <h5 class="mb-1">@meal.Name</h5>
+                                                        <p class="text-muted mb-1">@meal.Description</p>
+                                                        <p class="mb-0">
+                                                            <span class="badge badge-info">@meal.DietaryType</span>
+                                                            @if (meal.Price > 0)
+                                                                {
+                                                            <span class="badge badge-primary">+$@meal.Price.ToString("N0")</span>
+                                                                }
+                                                                else
+                                                                {
+                                                            <span class="badge badge-success">Incluido</span>
+                                                                }
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Servicios Extra -->
+                        <section class="mb-5">
+                            <h4 class="mb-3">Servicios Adicionales</h4>
+                            <p class="text-muted mb-3">Personalice su viaje con estos servicios exclusivos.</p>
+
+                            <div class="extra-services">
+                                <div class="row">
+                                    @for (int i = 0; i < Model.ExtraServices.Count; i++)
+                                    {
+                                        var service = Model.ExtraServices[i];
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" id="service-@service.Id" name="SelectedExtraServiceIds"
+                                                           value="@service.Id" class="custom-control-input extra-service"
+                                                           data-price="@service.Price">
+                                                    <label class="custom-control-label" for="service-@service.Id">
+                                                        <h5 class="mb-1">@service.Name</h5>
+                                                        <p class="text-muted mb-1">@service.Description</p>
+                                                        <p class="mb-0">
+                                                            <span class="badge badge-primary">+$@service.Price.ToString("N0")</span>
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="javascript:history.back();" class="btn btn-secondary">Volver</a>
+                            <button type="submit" class="btn btn-primary">Continuar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Resumen de Servicios</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5>Detalles del Vuelo</h5>
+                        <p>
+                            <strong>Vuelo:</strong> @ViewBag.FlightInfo.FlightNumber<br />
+                            <strong>Ruta:</strong> @ViewBag.FlightInfo.OriginCity (@ViewBag.FlightInfo.OriginCityCode) - @ViewBag.FlightInfo.DestinationCity (@ViewBag.FlightInfo.DestinationCityCode)<br />
+                            <strong>Fecha:</strong> @ViewBag.FlightInfo.DepartureTime.ToString("dd/MM/yyyy")<br />
+                            <strong>Tarifa:</strong> @ViewBag.SelectedFareName
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Servicios Seleccionados</h5>
+                        <div id="services-summary">
+                            <div id="baggage-summary" class="mb-2">
+                                <h6 class="mb-2">Equipaje</h6>
+                                <div id="baggage-list">
+                                    <p class="text-muted">No ha seleccionado equipaje adicional</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div id="meal-summary" class="mb-2">
+                                <h6 class="mb-2">Comidas</h6>
+                                <div id="meal-selected">
+                                    <p class="text-muted">Menú regular (incluido)</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div id="extras-summary" class="mb-2">
+                                <h6 class="mb-2">Servicios Extra</h6>
+                                <div id="extras-list">
+                                    <p class="text-muted">No ha seleccionado servicios adicionales</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-summary">
+                        <h5>Resumen de Costos</h5>
+                        <div class="d-flex justify-content-between">
+                            <span>Equipaje adicional:</span>
+                            <span id="baggage-cost">$0</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Opciones de comida:</span>
+                            <span id="meal-cost">$0</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Servicios extra:</span>
+                            <span id="extras-cost">$0</span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <strong>Total servicios adicionales:</strong>
+                            <strong id="total-additional-cost">$0</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        /* Estilos para selectores de cantidad */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            width: 120px;
+        }
+
+            .quantity-selector .form-control-sm {
+                text-align: center;
+                width: 40px;
+                padding: 0.25rem;
+                border-left: 0;
+                border-right: 0;
+                border-radius: 0;
+            }
+
+        /* Estilos para pasos de reserva */
+        .booking-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+            .step:not(:last-child):after {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 60%;
+                width: 80%;
+                height: 2px;
+                background-color: #dee2e6;
+                z-index: 0;
+            }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            color: #6c757d;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step.active .step-icon {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .step.completed .step-icon {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .step.completed:after {
+            background-color: #28a745;
+        }
+
+        /* Estilos para tarjetas de servicios */
+        .meal-options .card, .extra-services .card {
+            transition: all 0.3s ease;
+        }
+
+        .meal-options .custom-control-input:checked ~ .custom-control-label,
+        .extra-services .custom-control-input:checked ~ .custom-control-label {
+            font-weight: bold;
+        }
+
+        .meal-options .card:hover, .extra-services .card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .meal-options .custom-control-input:checked + .custom-control-label::before,
+        .extra-services .custom-control-input:checked + .custom-control-label::before {
+            border-color: #007bff;
+            background-color: #007bff;
+        }
+
+        .meal-options .card-body, .extra-services .card-body {
+            padding: 1rem;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            // Función para formatear moneda
+            function formatCurrency(amount) {
+                return '$' + parseInt(amount).toLocaleString('es-CO');
+            }
+
+            // Variables para cálculos
+            let baggageCost = 0;
+            let mealCost = 0;
+            let extrasCost = 0;
+
+            // Función para actualizar resumen
+            function updateSummary() {
+                // Actualizar costos mostrados
+                $('#baggage-cost').text(formatCurrency(baggageCost));
+                $('#meal-cost').text(formatCurrency(mealCost));
+                $('#extras-cost').text(formatCurrency(extrasCost));
+                $('#total-additional-cost').text(formatCurrency(baggageCost + mealCost + extrasCost));
+
+                // Actualizar resumen de equipaje
+                let baggageHtml = '';
+                let hasBaggage = false;
+
+                $('.quantity-input').each(function() {
+                    const quantity = parseInt($(this).val());
+                    if (quantity > 0) {
+                        hasBaggage = true;
+                        const id = $(this).data('id');
+                        const price = $(this).data('price');
+                        const description = $(this).closest('tr').find('strong').text();
+
+                        baggageHtml += `<div class="d-flex justify-content-between mb-1">
+                            <span>${description} x ${quantity}</span>
+                            <span>${formatCurrency(price * quantity)}</span>
+                        </div>`;
+                    }
+                });
+
+                if (hasBaggage) {
+                    $('#baggage-list').html(baggageHtml);
+                } else {
+                    $('#baggage-list').html('<p class="text-muted">No ha seleccionado equipaje adicional</p>');
+                }
+
+                // Actualizar resumen de comidas
+                const selectedMeal = $('input[name="SelectedMealIds"]:checked');
+                if (selectedMeal.length > 0) {
+                    const mealId = selectedMeal.val();
+                    const mealName = selectedMeal.closest('.card').find('h5').text();
+                    const mealPrice = selectedMeal.data('price');
+
+                    let mealText = mealName;
+                    if (mealPrice > 0) {
+                        mealText += ` (${formatCurrency(mealPrice)})`;
+                    } else {
+                        mealText += ' (incluido)';
+                    }
+
+                    $('#meal-selected').html(`<p>${mealText}</p>`);
+                }
+
+                // Actualizar resumen de servicios extra
+                let extrasHtml = '';
+                let hasExtras = false;
+
+                $('.extra-service:checked').each(function() {
+                    hasExtras = true;
+                    const id = $(this).val();
+                    const price = $(this).data('price');
+                    const name = $(this).closest('.card').find('h5').text();
+
+                    extrasHtml += `<div class="d-flex justify-content-between mb-1">
+                        <span>${name}</span>
+                        <span>${formatCurrency(price)}</span>
+                    </div>`;
+                });
+
+                if (hasExtras) {
+                    $('#extras-list').html(extrasHtml);
+                } else {
+                    $('#extras-list').html('<p class="text-muted">No ha seleccionado servicios adicionales</p>');
+                }
+            }
+
+            // Eventos para equipaje
+            $('.quantity-increase').click(function() {
+                const input = $(this).siblings('.quantity-input');
+                const currentVal = parseInt(input.val());
+                const max = parseInt(input.attr('max'));
+
+                if (currentVal < max) {
+                    input.val(currentVal + 1);
+
+                    // Actualizar input hidden para el formulario
+                    const hiddenInput = $(this).closest('td').find('.baggage-id-input');
+                    const baggageId = input.data('id');
+
+                    // Repetir el ID la cantidad de veces seleccionada
+                    const newValue = Array(currentVal + 1).fill(baggageId).join(',');
+                    hiddenInput.val(newValue);
+
+                    // Actualizar costo
+                    baggageCost += parseInt(input.data('price'));
+                    updateSummary();
+                }
+            });
+
+            $('.quantity-decrease').click(function() {
+                const input = $(this).siblings('.quantity-input');
+                const currentVal = parseInt(input.val());
+
+                if (currentVal > 0) {
+                    input.val(currentVal - 1);
+
+                    // Actualizar input hidden para el formulario
+                    const hiddenInput = $(this).closest('td').find('.baggage-id-input');
+                    const baggageId = input.data('id');
+
+                    // Repetir el ID la cantidad de veces seleccionada
+                    const newValue = Array(currentVal - 1).fill(baggageId).join(',');
+                    hiddenInput.val(newValue);
+
+                    // Actualizar costo
+                    baggageCost -= parseInt(input.data('price'));
+                    updateSummary();
+                }
+            });
+
+            // Eventos para comidas
+            $('.meal-option').change(function() {
+                // Resetear costo de comidas
+                mealCost = 0;
+
+                // Calcular nuevo costo
+                const selectedMeal = $('input[name="SelectedMealIds"]:checked');
+                if (selectedMeal.length > 0) {
+                    mealCost = parseInt(selectedMeal.data('price'));
+                }
+
+                updateSummary();
+            });
+
+            // Eventos para servicios extra
+            $('.extra-service').change(function() {
+                // Resetear costo de extras
+                extrasCost = 0;
+
+                // Calcular nuevo costo
+                $('.extra-service:checked').each(function() {
+                    extrasCost += parseInt($(this).data('price'));
+                });
+
+                updateSummary();
+            });
+
+            // Inicializar
+            updateSummary();
+        });
+    </script>
+}
